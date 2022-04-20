@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+
+before_install:    # run this before runnign the test suite
+  - docker build -t bryanvumacam/docker-react -f Dockerfile.dev .
+
+script:    # run the test suite
+  - docker run bryanvumacam/docker-react npm run test -- --coverage
+    # -- --coverage will make us exit the terminal once test has been done
+    # by default, npm run test will make us become interactive with the terminal
+    # to resolve this and exit the interactive mode, we add the -- --coverage
